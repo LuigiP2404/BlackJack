@@ -45,6 +45,9 @@ const BlackJack = () => {
     const totalCards = basicDeck.length * 4 * deckNumber;
 
     const [gameStatus, setGameStatus] = useState<boolean>(false);
+    const [gameReady, setGameReady] = useState<boolean>(false);
+
+    const [showRulesFlag, setShowRulesFlag] = useState<boolean>(false);
 
     const [remainingCards, setRemainingCards] = useState<number>(totalCards);
     const remainingCardsRef = useRef<number>(totalCards);
@@ -219,6 +222,7 @@ const BlackJack = () => {
         }, 500);
         setTimeout(() => {
             playerHit();
+            setGameReady(true);
         }, 1500);
     }
 
@@ -232,26 +236,25 @@ const BlackJack = () => {
         }, 500);
     }
 
-    // const startGame = () => {
-    //     setGameStatus(true);
-    //     setDeck(new Deck(deckNumber));
-    //     setRemainingCards(totalCards);
-    //     gameSetup();
-    // }
-
     const restart = () => {
         setDeck(new Deck(deckNumber));
         setWinner('');
         setRemainingCards(totalCards);
         setPlayerCards([]);
         setDealerCards([]);
+        setGameReady(false);
         setTimeout(() => {
             gameSetup();
         }, 500);
     }
 
+    const toggleRules = (bool: boolean) => {
+        setShowRulesFlag(bool);
+    }
+
     return (
         <React.Fragment>
+            <button className="rules-button" onClick={() => toggleRules(true)}>RULES</button>
             <div className="container">
                 {/* <input id="decks-amount" type="number" />
                 <button id="log" onClick={logDecks}>Logga i mazzi</button> */}
@@ -261,33 +264,35 @@ const BlackJack = () => {
                 <div className="cards-row">
                     <div className="dealer-side user">
                         <h1 className="text-center">Dealer</h1>
-                        {dealerCards.map((card: string) => (
-                            <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
-                        ))}
+                        <div className="cards-container">
+                            {dealerCards.map((card: string) => (
+                                <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
+                            ))}
+                        </div>
                         <p>{dealerTotal}</p>
                     </div>
                     <div className="player-side user">
                         <h1 className="text-center">Player</h1>
-                        {playerCards.map((card: string) => (
-                            <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
-                        ))}
+                        <div className="cards-container">
+                            {playerCards.map((card: string) => (
+                                <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
+                            ))}
+                        </div>
                         <p>{playerTotal}</p>
                         <div className="buttons-row">
-                            <button id="pick" onClick={() => playerHit()}>Hit</button>
-                            <button id="stand" onClick={() => playerStand()}>Stand</button>
+                            <button id="pick" onClick={() => playerHit()}>HIT</button>
+                            <button id="stand" onClick={() => playerStand()}>STAND</button>
                         </div>
                     </div>
-
                 </div>
 
                 <div id="shufflingText" className="shuffling-text">Shuffling...</div>
             </div>
             {winner ?
                 <div className="winner-modal">
-                    <div className="">Esito:</div>
-                    <div>{winner}</div>
+                    {winner !== 'Draw' ? <div>{winner} won</div> : <div>{winner}</div>}
                     <div className="button-bar">
-                        <button onClick={restart} className="newgame-button">Nuova partita</button>
+                        <button onClick={restart} className="newgame-button">NEW GAME</button>
                     </div>
                 </div> :
                 null}
@@ -304,6 +309,23 @@ const BlackJack = () => {
                 </div>
                 : null
             } */}
+            {showRulesFlag ?
+                <div className="winner-modal rules">
+                    <p>
+                        The purpose of blackjack is to get as close as possible and not to exceed 21.
+                        The cards have the indicated value, while the figures J Q and K are worth 10 and the ace is worth 11 or 1, depending on the sum of the cards.
+                        You play against the dealer, who is forced to ask for cards until he reaches at least 17, in case the dealer exceeds 21, the player automatically wins.
+                        At the beginning of the game 2 cards are awarded to the player and 1 card to the dealer, once the player has finished his turn, in which he can take card or not, begins the dealer’s turn, which if he has not exceeded 17, is forced to take card.
+                        If the dealer reaches or exceeds 17 (without exceeding 21), the player who has the highest value wins.
+                    </p>
+                    <button className="rules-button db" onClick={() => toggleRules(false)}>Close</button>
+                </div> :
+                null}
+            {!gameReady ?
+                <div className="winner-modal">
+                    Giving cards...
+                </div> :
+                null}
         </React.Fragment>
 
     )
