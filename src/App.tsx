@@ -1,11 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
-import Decks from './components/decks';
+// import Decks from './components/decks';
 import './App.css';
+import BlackJack from './components/BlackJack';
 
 function App() {
   return (
-    <Decks />
+    <BlackJack></BlackJack>
+    // <Decks />
   );
 }
 
