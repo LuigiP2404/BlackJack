@@ -1,4 +1,4 @@
-This project is hosted at --> https://luigip2404.github.io/blackjack/
+This project is hosted at --> https://luigip2404.github.io/BlackJack/
 
 # Getting Started with Create React App
 
