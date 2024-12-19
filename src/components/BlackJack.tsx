@@ -39,7 +39,9 @@ const BlackJack = () => {
     const [deck, setDeck] = useState<DeckType>(new Deck(1));
 
     const [deckNumber, setDeckNumber] = useState<number>(1);
-
+    
+    const [disableHit, setDisableHit] = useState<boolean>(false);
+    
     const [balance, setBalance] = useState<number>(5000);
 
     const totalCards = basicDeck.length * 4 * deckNumber;
@@ -168,7 +170,9 @@ const BlackJack = () => {
     };
 
     const playerHit = () => {
-        genericHit('P');
+        if (!disableHit) {
+            genericHit('P');
+        }
     }
 
     const dealerHit = () => {
@@ -176,6 +180,7 @@ const BlackJack = () => {
     }
 
     const playerStand = () => {
+        setDisableHit(true);
         async function dealerTurn() {
             while (typeof dealerTotalRef.current === 'number' && dealerTotalRef.current <= 16 || typeof dealerTotalRef.current == 'string' && (dealerTotalRef.current !== 'Bust' && dealerTotalRef.current !== 'Blackjack')) {
                 dealerHit();
@@ -242,6 +247,7 @@ const BlackJack = () => {
         setRemainingCards(totalCards);
         setPlayerCards([]);
         setDealerCards([]);
+        setDisableHit(false);
         setGameReady(false);
         setTimeout(() => {
             gameSetup();
@@ -266,7 +272,7 @@ const BlackJack = () => {
                         <h1 className="text-center">Dealer</h1>
                         <div className="cards-container">
                             {dealerCards.map((card: string) => (
-                                <img src={`BlackJack/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
+                                <img src={`assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
                             ))}
                         </div>
                         <p>{dealerTotal}</p>
@@ -279,7 +285,7 @@ const BlackJack = () => {
                         </div>
                         <div className="cards-container">
                             {playerCards.map((card: string) => (
-                                <img src={`BlackJack/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
+                                <img src={`assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
                             ))}
                         </div>
                         <p>{playerTotal}</p>
