@@ -41,7 +41,7 @@ code {
 }
 
 .bj-card {
-  width: 150px;
+  width: auto;
 }
 
 #root, .container {
@@ -172,13 +172,13 @@ code {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  min-height: 225px;
+  min-height: 180px;
 }
 
 @media all and (max-width: 768px) {
-  .bj-card {
+  /* .bj-card {
     width: 100px;
-  }
+  } */
 
   .rules-button {
     position: unset;

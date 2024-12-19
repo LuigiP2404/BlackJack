@@ -273,16 +273,16 @@ const BlackJack = () => {
                     </div>
                     <div className="player-side user">
                         <h1 className="text-center">Player</h1>
+                        <div className="buttons-row">
+                            <button id="pick" onClick={() => playerHit()}>HIT</button>
+                            <button id="stand" onClick={() => playerStand()}>STAND</button>
+                        </div>
                         <div className="cards-container">
                             {playerCards.map((card: string) => (
                                 <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
                             ))}
                         </div>
                         <p>{playerTotal}</p>
-                        <div className="buttons-row">
-                            <button id="pick" onClick={() => playerHit()}>HIT</button>
-                            <button id="stand" onClick={() => playerStand()}>STAND</button>
-                        </div>
                     </div>
                 </div>
 
