@@ -42,6 +42,7 @@ code {
 
 .bj-card {
   width: auto;
+  height: 190px;
 }
 
 #root, .container {
@@ -172,7 +173,7 @@ code {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  min-height: 180px;
+  height: 190px;
 }
 
 @media all and (max-width: 768px) {
@@ -191,7 +192,7 @@ code {
   }
 
   .cards-container {
-    min-height: 150px;
+    height: 150px;
   }
 
   body {

@@ -266,7 +266,7 @@ const BlackJack = () => {
                         <h1 className="text-center">Dealer</h1>
                         <div className="cards-container">
                             {dealerCards.map((card: string) => (
-                                <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
+                                <img src={`BlackJack/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
                             ))}
                         </div>
                         <p>{dealerTotal}</p>
@@ -279,7 +279,7 @@ const BlackJack = () => {
                         </div>
                         <div className="cards-container">
                             {playerCards.map((card: string) => (
-                                <img src={`/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
+                                <img src={`BlackJack/assets/img/cards/${card}.svg`} alt="" key={card} className="bj-card" />
                             ))}
                         </div>
                         <p>{playerTotal}</p>

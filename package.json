@@ -1,7 +1,7 @@
 {
   "name": "blackjack",
   "version": "0.1.0",
-  "homepage": "https://luigip2404.github.io/blackjack",
+  "homepage": "https://luigip2404.github.io/BlackJack",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
