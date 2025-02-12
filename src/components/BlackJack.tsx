@@ -191,6 +191,7 @@ const BlackJack = () => {
             }, 1000);
         }
         dealerTurn();
+        setDisableHit(false);
     };
 
     const checkGame = () => {
